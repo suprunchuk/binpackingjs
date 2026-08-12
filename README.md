@@ -33,7 +33,7 @@ Live interactive demos of every feature in this README — `pack2D` / `pack3D`, 
   <img src="docs/screenshots/3d-quickstart.png" alt="3D bin packing with interactive Three.js viewer" width="700" />
 </p>
 
-Run it locally:
+Run it locally from the repo root. The playground is a workspace, so one `bun install` also installs its React / Three.js dependencies:
 
 ```bash
 bun install

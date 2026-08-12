@@ -29,7 +29,6 @@ jobs:
         with:
           bun-version: "1.3.12"
       - run: bun install --frozen-lockfile
-      - run: cd playground && bun install
       - run: bun run build
       - run: bun run playground:build
       - uses: actions/configure-pages@v5
