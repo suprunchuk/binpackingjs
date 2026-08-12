@@ -122,6 +122,7 @@ console.log(result.unfitItems.length);          // 0
 | `boxes` | `Box2D[]` | required | Boxes to pack `{ width, height, constrainRotation? }` |
 | `heuristic` | `Heuristic` | `BestShortSideFit` | Placement strategy |
 | `limit` | `number` | all | Max boxes to pack |
+| `factor` | `number` | auto | Integer scale for float-safe packing. Derived from input precision (up to 10 decimal places) if omitted. Pass `1` to disable. |
 
 **Returns** `{ packedBins: PackedBin2D[], unpackedBoxes: Box2D[] }`
 
@@ -135,6 +136,7 @@ Each `PackedBin2D` contains:
 |--------|------|---------|-------------|
 | `bins` | `Bin3D[]` | required | Available bins `{ name, width, height, depth, maxWeight }` |
 | `items` | `Item3D[]` | required | Items to pack `{ name, width, height, depth, weight, allowedRotations? }` |
+| `factor` | `number` | auto | Same as `pack2D`: integer scale for float-safe packing |
 
 **Returns** `{ packedBins: PackedBin3D[], unfitItems: Item3D[] }`
 
