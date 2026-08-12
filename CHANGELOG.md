@@ -1,5 +1,43 @@
 # Changelog
 
+## 4.1.0 (2026-05-14)
+
+### New Features
+
+- **Dynamic float-safe factoring** — `pack2D` now uses the same integer factoring as `pack3D`, shared via a common helper. The factor is computed from input precision (up to 10 decimal places) instead of a hardcoded `100000`
+- **`factor` option** — pass a custom scale to `pack2D` / `pack3D`, or `1` to disable factoring
+
+### Bug Fixes
+
+- Fixed 2D float precision rejecting valid placements (e.g. `0.1 + 0.2 > 0.3`)
+
+---
+
+## 4.0.2 (2026-05-14)
+
+### Bug Fixes
+
+- Fixed case-sensitive import paths on Linux: `src/2D` / `src/3D` renamed to `src/2d` / `src/3d` to match package exports
+
+---
+
+## 4.0.1 (2026-05-14)
+
+### Bug Fixes
+
+- Fixed `Score.subtract` adding instead of subtracting
+- Fixed `maxWeight: 0` treated as unlimited (now correctly rejects all items)
+- Fixed infinite recursion in 3D `packToBin` / `getBiggerBinThan` via a visited set
+- Fixed 3D packed output mixing factored and original units
+- Fixed 3D volume overflow by computing volume from original units
+- Fixed `pruneFreeList` skipping the last free rectangle
+
+### Other
+
+- Added audit-issue tests, benchmarks, and load/stress tests
+
+---
+
 ## 4.0.0 (2026-05-13)
 
 ### Breaking Changes
