@@ -13,8 +13,7 @@
     "exactOptionalPropertyTypes": true,
     "isolatedModules": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "types": ["bun-types"]
+    "forceConsistentCasingInFileNames": true
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "dist", "test"]
