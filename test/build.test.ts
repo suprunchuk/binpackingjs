@@ -1,6 +1,10 @@
 import { describe, it, expect } from 'bun:test';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 
-describe('Build verification', () => {
+const distExists = existsSync(join(import.meta.dir, '../dist/esm/index.js'));
+
+describe.skipIf(!distExists)('Build verification', () => {
   it('ESM main entry exports pack2D and pack3D', async () => {
     const mod = await import('../dist/esm/index.js');
     expect(typeof mod.pack2D).toBe('function');
@@ -8,13 +12,13 @@ describe('Build verification', () => {
   });
 
   it('ESM 2D entry exports pack2D', async () => {
-    const mod = await import('../dist/esm/2D/index.js');
+    const mod = await import('../dist/esm/2d/index.js');
     expect(typeof mod.pack2D).toBe('function');
     expect(typeof mod.Packer2D).toBe('function');
   });
 
   it('ESM 3D entry exports pack3D', async () => {
-    const mod = await import('../dist/esm/3D/index.js');
+    const mod = await import('../dist/esm/3d/index.js');
     expect(typeof mod.pack3D).toBe('function');
     expect(typeof mod.Packer3D).toBe('function');
   });

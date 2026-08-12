@@ -1,8 +1,8 @@
 import { describe, test, expect } from 'bun:test';
-import { Score } from '../src/2D/score';
-import { pack3D } from '../src/3D/packer';
-import { pack2D } from '../src/2D/packer';
-import { factoredInteger, toOriginal } from '../src/3D/util';
+import { Score } from '../src/2d/score';
+import { pack3D } from '../src/3d/packer';
+import { pack2D } from '../src/2d/packer';
+import { factoredInteger, toOriginal } from '../src/3d/util';
 
 // ---------------------------------------------------------------------------
 // H4: Score.subtract adds instead of subtracting

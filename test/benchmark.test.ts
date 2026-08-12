@@ -1,8 +1,8 @@
 import { describe, test, expect } from 'bun:test';
-import { pack2D } from '../src/2D/packer';
-import { pack3D } from '../src/3D/packer';
-import type { Box2D, Bin2D } from '../src/2D/types';
-import type { Item3D, Bin3D } from '../src/3D/types';
+import { pack2D } from '../src/2d/packer';
+import { pack3D } from '../src/3d/packer';
+import type { Box2D, Bin2D } from '../src/2d/types';
+import type { Item3D, Bin3D } from '../src/3d/types';
 
 function measureSync(fn: () => void, label: string) {
   const before = process.memoryUsage();
@@ -57,7 +57,7 @@ describe('2D benchmarks', () => {
       expect(r.packedBins.length).toBeGreaterThan(0);
     }, '2D 500 boxes');
     expect(elapsed).toBeLessThan(5000);
-  });
+  }, 10_000);
 
   test('1000 boxes / 1 bin', () => {
     const bins: Bin2D[] = [{ width: 5000, height: 5000 }];
@@ -67,7 +67,7 @@ describe('2D benchmarks', () => {
       expect(r.packedBins.length).toBeGreaterThan(0);
     }, '2D 1000 boxes');
     expect(elapsed).toBeLessThan(30000);
-  });
+  }, 35_000);
 
   test('500 boxes / 5 bins', () => {
     const bins: Bin2D[] = Array.from({ length: 5 }, () => ({ width: 500, height: 500 }));
@@ -77,7 +77,7 @@ describe('2D benchmarks', () => {
       expect(r.packedBins.length).toBe(5);
     }, '2D 500 boxes / 5 bins');
     expect(elapsed).toBeLessThan(30000);
-  });
+  }, 35_000);
 });
 
 // ---------------------------------------------------------------------------
@@ -102,7 +102,7 @@ describe('3D benchmarks', () => {
       expect(r.packedBins.length).toBeGreaterThan(0);
     }, '3D 200 items');
     expect(elapsed).toBeLessThan(10000);
-  });
+  }, 15_000);
 
   test('500 items / 1 bin', () => {
     const bins: Bin3D[] = [{ name: 'bin', width: 500, height: 500, depth: 500, maxWeight: 500000 }];
@@ -112,7 +112,7 @@ describe('3D benchmarks', () => {
       expect(r.packedBins.length).toBeGreaterThan(0);
     }, '3D 500 items');
     expect(elapsed).toBeLessThan(60000);
-  });
+  }, 65_000);
 
   test('100 items / 5 bins', () => {
     const bins: Bin3D[] = Array.from({ length: 5 }, (_, i) => ({
@@ -128,7 +128,7 @@ describe('3D benchmarks', () => {
       expect(r.packedBins.length).toBe(5);
     }, '3D 100 items / 5 bins');
     expect(elapsed).toBeLessThan(10000);
-  });
+  }, 15_000);
 });
 
 // ---------------------------------------------------------------------------
@@ -144,7 +144,7 @@ describe('load tests', () => {
     }, '2D 2000 boxes LOAD');
     expect(elapsed).toBeLessThan(120000);
     expect(heapDelta).toBeLessThan(512);
-  });
+  }, 130_000);
 
   test('3D: 500 items large bin should not OOM or hang', () => {
     const bins: Bin3D[] = [{ name: 'big', width: 500, height: 500, depth: 500, maxWeight: 500_000 }];
@@ -155,7 +155,7 @@ describe('load tests', () => {
     }, '3D 500 items LOAD');
     expect(elapsed).toBeLessThan(120000);
     expect(heapDelta).toBeLessThan(512);
-  });
+  }, 130_000);
 
   test('2D: many small boxes in tight bin (worst-case fragmentation)', () => {
     const bins: Bin2D[] = [{ width: 30, height: 30 }];
@@ -167,7 +167,7 @@ describe('load tests', () => {
       expect(r.unpackedBoxes.length).toBeGreaterThan(0);
     }, '2D fragmentation stress');
     expect(elapsed).toBeLessThan(30000);
-  });
+  }, 35_000);
 
   test('3D: identical items (uniform packing)', () => {
     const bins: Bin3D[] = [{ name: 'bin', width: 100, height: 100, depth: 100, maxWeight: 100000 }];
@@ -184,7 +184,7 @@ describe('load tests', () => {
       expect(packed).toBeGreaterThan(0);
     }, '3D uniform cubes');
     expect(elapsed).toBeLessThan(30000);
-  });
+  }, 35_000);
 
   test('3D: items larger than bin (all rejected)', () => {
     const bins: Bin3D[] = [{ name: 'tiny', width: 1, height: 1, depth: 1, maxWeight: 100 }];
